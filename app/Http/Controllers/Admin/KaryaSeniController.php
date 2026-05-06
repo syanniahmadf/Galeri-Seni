@@ -14,12 +14,15 @@ class KaryaSeniController extends Controller
 {
     /**
      * Menampilkan daftar semua karya seni.
+     * Pastikan variabel yang dikirim bernama $karya untuk mencocokkan View.
      */
     public function index()
     {
         // Mengambil data dengan eager loading untuk optimasi query
-        $data = KaryaSeni::with(['seniman', 'kategori', 'pameran'])->latest()->get();
-        return view('admin.karya-seni.index', compact('data'));
+        // Kita gunakan nama variabel $karya agar sesuai dengan yang dipanggil di index.blade.php
+        $karya = KaryaSeni::with(['seniman', 'kategori', 'pameran'])->latest()->get();
+        
+        return view('admin.karya-seni.index', compact('karya'));
     }
 
     /**
@@ -48,7 +51,6 @@ class KaryaSeniController extends Controller
             'deskripsi'   => 'nullable|string',
         ]);
 
-        // Proses Upload Gambar
         $path = $request->file('gambar')->store('karya', 'public');
 
         KaryaSeni::create([
@@ -69,7 +71,6 @@ class KaryaSeniController extends Controller
      */
     public function show(KaryaSeni $karya_seni)
     {
-        // Load relasi agar data seniman/kategori muncul di view detail
         $karya_seni->load(['seniman', 'kategori', 'pameran']);
         return view('admin.karya-seni.show', compact('karya_seni'));
     }
@@ -102,16 +103,11 @@ class KaryaSeniController extends Controller
 
         $data = $request->only(['judul', 'seniman_id', 'kategori_id', 'pameran_id', 'deskripsi']);
 
-        // Logika Ganti Gambar
         if ($request->hasFile('gambar')) {
-            // Hapus gambar lama dari folder storage
             if ($karya_seni->gambar) {
                 Storage::disk('public')->delete($karya_seni->gambar);
             }
-            
-            // Simpan gambar baru
-            $path = $request->file('gambar')->store('karya', 'public');
-            $data['gambar'] = $path;
+            $data['gambar'] = $request->file('gambar')->store('karya', 'public');
         }
 
         $karya_seni->update($data);
@@ -125,7 +121,6 @@ class KaryaSeniController extends Controller
      */
     public function destroy(KaryaSeni $karya_seni)
     {
-        // Hapus file gambar secara fisik dari storage
         if ($karya_seni->gambar) {
             Storage::disk('public')->delete($karya_seni->gambar);
         }

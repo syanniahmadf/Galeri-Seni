@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\PameranController;
 use App\Http\Controllers\Admin\KaryaSeniController;
 use Illuminate\Support\Facades\Auth;
-
+ 
 // Redirect root ke login
 Route::get('/', function () {
     return redirect('/login');
