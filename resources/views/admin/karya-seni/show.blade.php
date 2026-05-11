@@ -76,7 +76,7 @@
 
                 <!-- Deskripsi / Narasi Kurator -->
                 <div class="mb-5">
-                    <h6 class="fw-bold text-uppercase mb-3" style="letter-spacing: 2px; font-size: 0.75rem;">Curatorial Notes</h6>
+                    <h6 class="fw-bold text-uppercase mb-3" style="letter-spacing: 2px; font-size: 0.75rem;">DESKRIPSI</h6>
                     <div class="lh-lg text-muted small" style="text-align: justify; border-left: 1px solid #eee; padding-left: 20px;">
                         {{ $karya_seni->deskripsi ?: 'Tidak ada narasi tambahan untuk karya ini.' }}
                     </div>

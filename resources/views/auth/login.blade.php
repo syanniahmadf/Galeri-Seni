@@ -235,7 +235,7 @@
     <!-- Login Card -->
     <div class="login-card">
         <div class="text-center mb-5">
-            <h1 class="art-title">Galeri Seni</h1>
+            <h1 class="art-title">Gallery Art</h1>
             <p class="small text-muted" style="letter-spacing: 6px; text-transform: uppercase; font-size: 0.6rem;">Admin System Login</p>
         </div>
 
@@ -268,7 +268,7 @@
         </form>
 
         <div class="footer-credit text-center">
-            &copy; {{ date('Y') }} GALLERY SENI MANAGEMENT SYSTEM <br> BY KELOMPOK 5
+            &copy; {{ date('Y') }} GALERI SENI MANAGEMENT SYSTEM <br> BY KELOMPOK 5
         </div>
     </div>
 
